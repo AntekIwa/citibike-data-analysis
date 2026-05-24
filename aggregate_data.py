@@ -2,7 +2,7 @@ import pandas as pd
 import os
 import glob
 
-# Ścieżka główna do surowych danych
+# sciezka do danych
 raw_data_path = 'data/raw'
 
 # Wyszukiwanie wszystkich plików CSV we wszystkich podfolderach
@@ -22,7 +22,7 @@ for file in all_files:
     # Wczytujemy plik
     df = pd.read_csv(file, low_memory=False)
 
-    # Rozpoznawanie kolumny z datą (Citi Bike zmieniało nazwy w trakcie lat)
+    # Rozpoznawanie kolumny z data
     if 'starttime' in df.columns:
         date_col = 'starttime'
     elif 'started_at' in df.columns:

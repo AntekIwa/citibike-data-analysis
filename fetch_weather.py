@@ -23,7 +23,7 @@ response = requests.get(url)
 if response.status_code == 200:
     data = response.json()
 
-    # Wyciągamy dane dzienne (daily) z odpowiedzi JSON
+    # Wyciągamy dane dzienne z odpowiedzi JSON
     daily_data = data['daily']
 
     df_weather = pd.DataFrame({
@@ -32,13 +32,12 @@ if response.status_code == 200:
         'temp_min_C': daily_data['temperature_2m_min'],
         'precipitation_mm': daily_data['precipitation_sum']
     })
-    # Zapisujemy do folderu processed
     output_path = 'data/processed/nyc_weather.csv'
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     df_weather.to_csv(output_path, index=False)
 
-    print(f"Sukces! Zapisano dane pogodowe w: {output_path}")
+    print(f"Zapisano dane pogodowe w: {output_path}")
     print("\nPierwsze kilka wierszy pogody:")
     print(df_weather.head())
 else:
-    print(f"Błąd podczas pobierania danych. Kod HTTP: {response.status_code}")
+    print(f"Błąd: kod HTTP: {response.status_code}")
